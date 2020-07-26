@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+		<style>
+			body 
+			{
+   				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+			}
+			form	
+			{
+   				margin: auto;
+  				width: 25%;
+  				border: 3px solid black;
+  				padding: 20px;
+			}
+			.inputContainer 
+			{
+   				width: 95%;
+   				margin-bottom: 10px;
+			}
+			.Field 
+			{
+   				width: 100%;
+   				padding: 6px;
+   				text-align: left;
+   				font-size: 15px;
+   				font-weight: 500;
+			}
+			.errspan 
+			{
+       				float: right;
+        			position: relative;
+				margin-right: 7px;
+        			margin-top: -20px;
+        			z-index: 2;
+        			color: gray;
+    			}
+			.signinbox
+			{
+				background-color: #3EA99F;
+				text-align: center;
+				width: 105%;
+				padding: 10px;
+			}
+		</style>
+<script>
+var myInput = document.getElementById("psw");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+}
+
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+</script>
+	</head>
+	<body link="black">
+		<script>
+			function checkemail(inputtext)
+			{
+				var ename=/\S+@\S+\.\S+/;
+				if(!(inputtext.value.match(ename)))
+				{
+					alert("Enter a valid E-mail id");
+					return false;
+				}
+			}
+			function checkpassword(inputtext)
+			{
+				var pname=/^(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.[a-zA-Z0-9])(?!.*\S).{8,15}$/;
+				if(!(inputtext.value.match(pname)))
+				{
+					alert("Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters");
+					return false;
+				}
+			}
+		</script>
+		<form name="validation" method="post">
+			<h1 style="text-align: center; background-color: #3EA99F;">Sign in</h1>
+			<div class="inputContainer">
+				<input class="Field" type="text" placeholder="mail@example.com" id="ename"/>
+				<span class="fa fa-envelope-o errspan"></span>
+			</div>
+			<div class="inputContainer">
+				<input class="Field" type="password" placeholder="password" id="pname"pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 characters" required/>
+				<span class="fa fa-unlock-alt errspan"></span>
+			</div>
+			<div class="inputContainer">
+				<input type="submit" class="signinbox" onclick=checkemail(document.getElementById("ename")) onclick=checkpassword(document.getElementById("pname")) value="SIGN IN">
+			</div>
+			<div class="inputContainer">
+    				<pre><span class="psw"><a href="#">Forgot password?</a>        <a href="#">Register?</a></span></pre>
+  			</div>
+		</form>
+	</body>
+</html>
